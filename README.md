@@ -35,13 +35,13 @@ Pedidos cancelados, devolvidos ou ainda em processamento são desconsiderados, g
 
 ## Consulta SQL
 
-<img width="319" height="54" alt="image" src="https://github.com/user-attachments/assets/81218f78-4654-4bf3-b764-558c2b1f7099" />
+<img width="316" height="52" alt="image" src="https://github.com/user-attachments/assets/a0dd4071-b704-4aeb-98cb-ebbf89b04458" />
 
 ---
 
 ## Resultado Esperado
 
-<img width="319" height="54" alt="image" src="https://github.com/user-attachments/assets/8ea07ced-fc58-4d8a-8b91-c39b60407b36" />
+<img width="185" height="53" alt="image" src="https://github.com/user-attachments/assets/c71ccdac-47ed-4c2d-a563-e713efcc457d" />
 
 ---
 
@@ -116,15 +116,13 @@ Ao excluir pedidos cancelados, devolvidos ou em processamento, o indicador repre
 
 ## Consulta SQL
 
-<img width="434" height="478" alt="image" src="https://github.com/user-attachments/assets/08f4ee2b-e180-450e-a57e-5ce315ecdd98" />
-
+<img width="319" height="54" alt="image" src="https://github.com/user-attachments/assets/8f3a5cf9-9fcc-472c-a507-12ee87371447" />
 
 ---
 
 ## Resultado Esperado
 
-<img width="667" height="55" alt="image" src="https://github.com/user-attachments/assets/a4aabc5f-04cb-4217-b4fc-c0d9b905cc35" />
-
+<img width="189" height="55" alt="image" src="https://github.com/user-attachments/assets/83a69d04-c639-406c-a1cb-a53d4ded73c3" />
 
 ---
 
