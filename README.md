@@ -35,14 +35,13 @@ Pedidos cancelados, devolvidos ou ainda em processamento são desconsiderados, g
 
 ## Consulta SQL
 
-<img width="316" height="52" alt="image" src="https://github.com/user-attachments/assets/a827c6eb-ce55-4e6f-a8f2-da5249e8a06b" />
-
+<img width="319" height="54" alt="image" src="https://github.com/user-attachments/assets/81218f78-4654-4bf3-b764-558c2b1f7099" />
 
 ---
 
 ## Resultado Esperado
 
-<img width="185" height="53" alt="image" src="https://github.com/user-attachments/assets/c9f8f1ad-683f-4b26-a6e0-c77511f71c01" />
+<img width="319" height="54" alt="image" src="https://github.com/user-attachments/assets/8ea07ced-fc58-4d8a-8b91-c39b60407b36" />
 
 ---
 
