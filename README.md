@@ -398,3 +398,138 @@ Por outro lado, uma taxa baixa pode indicar oportunidades de melhoria em estrat�
 --------------------------------------------------
 
 
+# 04 - Ranking Mensal por Categoria
+
+## Objetivo
+
+Identificar o desempenho das categorias de produtos em cada mês, classificando-as de acordo com o faturamento gerado.
+
+Essa consulta permite acompanhar quais categorias apresentaram melhor desempenho ao longo do tempo e identificar mudanças no comportamento das vendas.
+
+---
+
+## Pergunta de Negócio
+
+> Qual é o ranking das categorias com maior faturamento em cada mês?
+
+---
+
+## Tabelas Utilizadas
+
+| Tabela | Descrição |
+|---------|-----------|
+| `categorias` | Armazena as categorias e os departamentos dos produtos. |
+| `produtos` | Armazena os produtos e suas respectivas categorias. |
+| `itens_pedido` | Armazena os produtos vendidos em cada pedido, incluindo quantidade e preço. |
+| `pedidos` | Armazena as informações dos pedidos, incluindo data, status e valor total. |
+
+---
+
+## Estratégia
+
+A consulta relaciona as tabelas `categorias`, `produtos`, `itens_pedido` e `pedidos` para identificar quais produtos pertencem a cada categoria e em quais pedidos foram vendidos.
+
+Inicialmente, os dados são agrupados por categoria e mês, permitindo calcular o faturamento de cada categoria em cada período.
+
+Em seguida, uma Window Function é utilizada para criar o ranking mensal das categorias, ordenando-as de acordo com o faturamento.
+
+A função `ROW_NUMBER()` é utilizada com `PARTITION BY` para reiniciar o ranking a cada mês.
+
+---
+
+## Consulta SQL
+<img width="362" height="731" alt="image" src="https://github.com/user-attachments/assets/44c0e15e-88c4-4a0a-9fe7-8735186c5705" />
+
+---
+
+## Resultado Esperado
+
+<img width="507" height="769" alt="image" src="https://github.com/user-attachments/assets/704a3b6b-4357-4bd8-b8f0-96ca0331f266" />
+
+---
+
+## Explicação da Consulta
+
+A CTE `metricas` é responsável por consolidar o faturamento de cada categoria em cada mês.
+
+A função `DATEFROMPARTS()` transforma a data do pedido no primeiro dia do respectivo mês:
+
+```sql
+DATEFROMPARTS(
+    YEAR(p.data_pedido),
+    MONTH(p.data_pedido),
+    1
+)
+```
+
+Isso permite agrupar todos os pedidos realizados no mesmo mês.
+
+O faturamento é calculado considerando o preço unitário, o desconto aplicado ao item e a quantidade vendida:
+
+```sql
+(ip.preco_unitario - ip.desconto_item)
+* ip.quantidade
+```
+
+A consulta considera somente pedidos concluídos:
+
+```sql
+WHERE p.status = 'concluido'
+```
+
+Após a consolidação dos dados, a função `ROW_NUMBER()` cria o ranking:
+
+```sql
+ROW_NUMBER() OVER (
+    PARTITION BY mes
+    ORDER BY faturamento DESC
+)
+```
+
+O `PARTITION BY mes` faz com que o ranking seja reiniciado a cada mês.
+
+Já o:
+
+```sql
+ORDER BY faturamento DESC
+```
+
+determina que a categoria com maior faturamento receba a posição 1.
+
+---
+
+## Conceitos SQL Utilizados
+
+- `WITH`
+- CTE (Common Table Expression)
+- `INNER JOIN`
+- `SUM()`
+- `GROUP BY`
+- `ROW_NUMBER()`
+- `OVER()`
+- `PARTITION BY`
+- `ORDER BY`
+- `DATEFROMPARTS()`
+- `YEAR()`
+- `MONTH()`
+
+---
+
+## Possíveis Insights
+
+- Identificação da categoria líder em cada mês.
+- Comparação do desempenho das categorias ao longo do tempo.
+- Identificação de mudanças no ranking.
+- Análise de sazonalidade.
+- Identificação de categorias em crescimento ou queda.
+- Apoio na definição de estratégias de estoque e marketing.
+
+---
+
+## Aplicação no Negócio
+
+O ranking mensal por categoria permite acompanhar a evolução do desempenho comercial de diferentes grupos de produtos.
+
+A partir dessa análise, a empresa pode identificar categorias que estão ganhando ou perdendo participação nas vendas, direcionar investimentos para categorias estratégicas, ajustar níveis de estoque e desenvolver campanhas comerciais específicas.
+
+Além disso, o uso de `ROW_NUMBER()` demonstra a aplicação de **Window Functions**, recurso importante para análises comparativas e rankings em SQL.
